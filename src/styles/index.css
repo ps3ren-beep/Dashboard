@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Cores — Primitivas do Figma */
+  --color-secondary-darker: #06080e;
+  --color-secondary-normal: #111827;
+  --color-secondary-light: #e7e8e9;
+  --color-surface-50: #ffffff;
+  --color-surface-700: #b5b5b5;
+  --color-background-400: #f5f6f8;
+  --color-neutral-0: #ffffff;
+  --color-neutral-300: #e5e7eb;
+  --color-neutral-900: #0d0f03;
+  --color-blue-200: #a2c2ff;
+  --color-blue-600: #3070e7;
+  --color-green-100: #c3f0dc;
+  --color-green-600: #38bb82;
+  --color-red-600: #d85e6d;
+
+  /* Cores — Semânticas */
+  --color-primary: var(--color-blue-600);
+  --color-success: var(--color-green-600);
+  --color-danger: var(--color-red-600);
+  --color-lime: #84cc16;
+
+  /* Espaçamento */
+  --space-0: 0;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-56: 56px;
+
+  /* Shape */
+  --shape-20: 20px;
+  --shape-100: 100px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-background-400);
+}
