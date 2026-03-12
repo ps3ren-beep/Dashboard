@@ -4,7 +4,7 @@
 
 - [x] PROMPT 0: Análise e Planejamento Inicial
 - [x] PROMPT 1: Estrutura Base e Configuração
-- [ ] PROMPT 2: Sistema de Layout e Navegação Desktop
+- [x] PROMPT 2: Sistema de Layout e Navegação Desktop
 - [ ] PROMPT 3: Sistema de Layout e Navegação Mobile
 - [ ] PROMPT 4: Context Global e Gerenciamento de Estado
 - [ ] PROMPT 5: Cards de Resumo Financeiro
@@ -49,7 +49,7 @@ Onde os prompts citarem 1024px ou 640px, adaptar para **1280px** e **768px** res
 ## To-Do por Prompt
 
 - [x] 1. Estrutura Base e Configuração
-- [ ] 2. Sistema de Layout e Navegação Desktop
+- [x] 2. Sistema de Layout e Navegação Desktop
 - [ ] 3. Sistema de Layout e Navegação Mobile
 - [ ] 4. Context Global e Gerenciamento de Estado
 - [ ] 5. Cards de Resumo Financeiro
@@ -93,6 +93,31 @@ Onde os prompts citarem 1024px ou 640px, adaptar para **1280px** e **768px** res
 
 Semânticas: --color-primary, --color-success, --color-danger  
 Primitivas: --color-secondary-*, --color-surface-*, --color-background-400, --color-neutral-*, --color-blue-*, --color-green-*, --color-red-*
+
+### Build
+
+Tentativas: 1 | Erros: 0
+
+---
+
+## PROMPT 2: Sistema de Layout e Navegação Desktop
+
+**Status:** ✅ | Data: 12/03/2025 | Build: ✅ (1 tentativa)
+
+### Implementado
+
+- Sidebar com estados expandido (299px) e colapsado (80px)
+- Botão circular na borda direita: seta esquerda (expandido) / direita (colapsado)
+- Transições suaves (300ms) no conteúdo principal
+- Tooltips ao passar mouse nos itens quando colapsada (delay 300ms)
+- Item ativo: fundo preto (neutral-900), texto branco, ícone verde-limão
+- Navegação: Dashboard, Objetivos, Cartões, Transações, Perfil
+- Renderização apenas em desktop (≥1280px) via useMediaQuery
+
+### Tokens
+
+Semânticas: --color-primary  
+Primitivas: --color-neutral-900, --color-surface-50, --color-secondary-normal, --color-lime, --shape-20, --shape-100
 
 ### Build
 
