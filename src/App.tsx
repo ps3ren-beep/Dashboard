@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { FinanceProvider } from '@/contexts';
 import { MainLayout } from '@/components/layout/MainLayout';
 import {
   DashboardPage,
@@ -11,7 +12,8 @@ import { ROUTES } from '@/constants/routes';
 
 function App() {
   return (
-    <BrowserRouter>
+    <FinanceProvider>
+      <BrowserRouter>
       <Routes>
         <Route element={<MainLayout />}>
           <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
@@ -23,6 +25,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </FinanceProvider>
   );
 }
 

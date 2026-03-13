@@ -6,9 +6,9 @@
 - [x] PROMPT 1: Estrutura Base e Configuração
 - [x] PROMPT 2: Sistema de Layout e Navegação Desktop
 - [x] PROMPT 3: Sistema de Layout e Navegação Mobile
-- [ ] PROMPT 4: Context Global e Gerenciamento de Estado
+- [x] PROMPT 4: Context Global e Gerenciamento de Estado
 - [ ] PROMPT 5: Cards de Resumo Financeiro
-- [ ] PROMPT 6: Header do Dashboard com Controles
+- [x] PROMPT 6: Header do Dashboard com Controles
 - [ ] PROMPT 7: Carrossel de Gastos por Categoria
 - [ ] PROMPT 8: Gráfico de Fluxo Financeiro
 - [ ] PROMPT 9: Widget de Cartões de Crédito
@@ -51,9 +51,9 @@ Onde os prompts citarem 1024px ou 640px, adaptar para **1280px** e **768px** res
 - [x] 1. Estrutura Base e Configuração
 - [x] 2. Sistema de Layout e Navegação Desktop
 - [x] 3. Sistema de Layout e Navegação Mobile
-- [ ] 4. Context Global e Gerenciamento de Estado
+- [x] 4. Context Global e Gerenciamento de Estado
 - [ ] 5. Cards de Resumo Financeiro
-- [ ] 6. Header do Dashboard com Controles
+- [x] 6. Header do Dashboard com Controles
 - [ ] 7. Carrossel de Gastos por Categoria
 - [ ] 8. Gráfico de Fluxo Financeiro
 - [ ] 9. Widget de Cartões de Crédito
@@ -150,9 +150,43 @@ Tentativas: 1 | Erros: 0
 
 ---
 
+## PROMPT 4: Context Global e Gerenciamento de Estado
+
+**Status:** ✅ | Data: 12/03/2025 | Build: ✅ (1 tentativa)
+
+### Implementado
+
+- FinanceProvider no topo da árvore (sem localStorage/sessionStorage)
+- Arrays: transactions, goals, creditCards, bankAccounts, familyMembers
+- CRUD completo para cada entidade (add, update, delete)
+- Filtros: selectedMember, dateRange, transactionType, searchText
+- Funções de cálculo: getFilteredTransactions, calculateTotalBalance, calculateIncomeForPeriod, calculateExpensesForPeriod, calculateExpensesByCategory, calculateCategoryPercentage, calculateSavingsRate
+- useFinance como único ponto de acesso
+- Mock: 3 membros, 2 contas, 3 cartões, 26 transações (3 meses), 4 objetivos
+
+### Build
+
+Tentativas: 1 | Erros: 0
+
+---
+
+## PROMPT 6: Header do Dashboard com Controles
+
+**Status:** ✅ | Data: 12/03/2025 | Build: ✅ (1 tentativa)
+
+### Implementado
+
+- DashboardHeader: barra horizontal responsiva; busca em tempo real; filtros; date picker; membros; Nova transação
+
+### Build
+
+Tentativas: 1 | Erros: 0
+
+---
+
 ## PROMPT 0: Análise e Planejamento Inicial
 
-**Status:** ✅ | Data: 12/03/2025 | Build: N/A (análise)
+**Status:** ✅ | Data: 12/03/2025 | N/A (análise)
 
 ### Fonte
 

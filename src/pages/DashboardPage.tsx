@@ -1,8 +1,10 @@
 import { PageContainer } from '@/components/layout/PageContainer';
+import { DashboardHeader } from '@/components/dashboard/DashboardHeader';
 
 export function DashboardPage() {
   return (
     <PageContainer>
+      <DashboardHeader />
       <h1 className="text-heading-medium font-bold text-secondary-normal">
         Dashboard
       </h1>

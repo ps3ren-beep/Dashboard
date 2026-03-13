@@ -21,7 +21,7 @@ export function MainLayout() {
   const mainPaddingTop = isDesktop ? undefined : HEADER_MOBILE_HEIGHT + 24; // header + conteúdo
 
   return (
-    <div className="min-h-screen w-full bg-background-400">
+    <div className="min-h-screen w-full overflow-x-hidden bg-background-400">
       {isDesktop ? (
         <Sidebar isExpanded={isExpanded} onToggle={toggle} />
       ) : (
@@ -29,7 +29,7 @@ export function MainLayout() {
       )}
 
       <main
-        className="w-full max-w-content mx-auto px-4 md:px-6 lg:px-8 py-6 transition-[margin] duration-300 ease-out"
+        className="min-w-0 w-full max-w-content mx-auto px-4 md:px-6 lg:px-8 py-6 transition-[margin] duration-300 ease-out"
         style={{
           marginLeft: mainMarginLeft,
           ...(mainPaddingTop != null && { paddingTop: mainPaddingTop }),
