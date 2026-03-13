@@ -7,9 +7,9 @@
 - [x] PROMPT 2: Sistema de Layout e Navegação Desktop
 - [x] PROMPT 3: Sistema de Layout e Navegação Mobile
 - [x] PROMPT 4: Context Global e Gerenciamento de Estado
-- [ ] PROMPT 5: Cards de Resumo Financeiro
+- [x] PROMPT 5: Cards de Resumo Financeiro
 - [x] PROMPT 6: Header do Dashboard com Controles
-- [ ] PROMPT 7: Carrossel de Gastos por Categoria
+- [x] PROMPT 7: Carrossel de Gastos por Categoria
 - [ ] PROMPT 8: Gráfico de Fluxo Financeiro
 - [ ] PROMPT 9: Widget de Cartões de Crédito
 - [ ] PROMPT 10: Widget de Próximas Despesas
@@ -52,9 +52,9 @@ Onde os prompts citarem 1024px ou 640px, adaptar para **1280px** e **768px** res
 - [x] 2. Sistema de Layout e Navegação Desktop
 - [x] 3. Sistema de Layout e Navegação Mobile
 - [x] 4. Context Global e Gerenciamento de Estado
-- [ ] 5. Cards de Resumo Financeiro
+- [x] 5. Cards de Resumo Financeiro
 - [x] 6. Header do Dashboard com Controles
-- [ ] 7. Carrossel de Gastos por Categoria
+- [x] 7. Carrossel de Gastos por Categoria
 - [ ] 8. Gráfico de Fluxo Financeiro
 - [ ] 9. Widget de Cartões de Crédito
 - [ ] 10. Widget de Próximas Despesas
@@ -170,6 +170,24 @@ Tentativas: 1 | Erros: 0
 
 ---
 
+## PROMPT 5: Cards de Resumo Financeiro
+
+**Status:** ✅ | Data: 12/03/2025 | Build: ✅ (1 tentativa)
+
+### Implementado
+
+- BalanceCard: fundo preto, círculo verde-limão desfocado, label "Saldo total", valor, badge de crescimento %
+- IncomeCard: fundo branco, ícone seta baixo-esquerda em círculo cinza, label "Receitas"
+- ExpenseCard: fundo branco, ícone seta cima-direita em círculo vermelho claro, label "Despesas"
+- useCountUp: animação de contagem ~800ms
+- Layout: horizontal desktop (BalanceCard proporcionalmente maior), vertical mobile
+
+### Build
+
+Tentativas: 1 | Erros: 0
+
+---
+
 ## PROMPT 6: Header do Dashboard com Controles
 
 **Status:** ✅ | Data: 12/03/2025 | Build: ✅ (1 tentativa)
@@ -177,6 +195,24 @@ Tentativas: 1 | Erros: 0
 ### Implementado
 
 - DashboardHeader: barra horizontal responsiva; busca em tempo real; filtros; date picker; membros; Nova transação
+
+### Build
+
+Tentativas: 1 | Erros: 0
+
+---
+
+## PROMPT 7: Carrossel de Gastos por Categoria
+
+**Status:** ✅ | Data: 12/03/2025 | Build: ✅ (1 tentativa)
+
+### Implementado
+
+- ExpensesByCategoryCarousel: dados de calculateExpensesByCategory
+- CategoryDonutCard: donut 64px, largura 160px, cores rotativas (lime, preto, cinza)
+- Percentual com 1 casa decimal, nome truncado, valor em R$
+- Scroll: mouse wheel horizontal, arrastar, setas (desktop)
+- Gradiente fade nas bordas, hover borda lime, mobile sem setas
 
 ### Build
 

@@ -80,6 +80,7 @@ interface FinanceContextValue {
   calculateExpensesByCategory: () => ExpenseByCategory[];
   calculateCategoryPercentage: (category: string) => number;
   calculateSavingsRate: () => number;
+  calculateBalanceGrowthPercent: () => number;
 }
 
 const FinanceContext = createContext<FinanceContextValue | null>(null);
@@ -360,10 +361,48 @@ export function FinanceProvider({ children }: FinanceProviderProps) {
   const filtered = getFilteredTransactions();
 
   const calculateTotalBalance = useCallback(() => {
-    const bankTotal = bankAccounts.reduce((acc, a) => acc + a.balance, 0);
-    const cardBills = creditCards.reduce((acc, c) => acc + c.currentBill, 0);
+    const filteredBanks =
+      selectedMember != null
+        ? bankAccounts.filter((a) => a.holderId === selectedMember)
+        : bankAccounts;
+    const filteredCards =
+      selectedMember != null
+        ? creditCards.filter((c) => c.holderId === selectedMember)
+        : creditCards;
+    const bankTotal = filteredBanks.reduce((acc, a) => acc + a.balance, 0);
+    const cardBills = filteredCards.reduce((acc, c) => acc + c.currentBill, 0);
     return bankTotal - cardBills;
-  }, [bankAccounts, creditCards]);
+  }, [bankAccounts, creditCards, selectedMember]);
+
+  const calculateBalanceGrowthPercent = useCallback((): number => {
+    const start = new Date(dateRange.startDate);
+    const end = new Date(dateRange.endDate);
+    const daysDiff = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) || 30;
+    const prevEnd = new Date(start);
+    prevEnd.setDate(prevEnd.getDate() - 1);
+    const prevStart = new Date(prevEnd);
+    prevStart.setDate(prevStart.getDate() - daysDiff);
+    const prevStartStr = prevStart.toISOString().slice(0, 10);
+    const prevEndStr = prevEnd.toISOString().slice(0, 10);
+
+    const currentNet = filtered
+      .filter((t) => t.type === 'income')
+      .reduce((a, t) => a + t.amount, 0) -
+      filtered
+        .filter((t) => t.type === 'expense')
+        .reduce((a, t) => a + t.amount, 0);
+
+    const prevFiltered = transactions.filter((t) => {
+      if (selectedMember != null && t.memberId !== selectedMember) return false;
+      return isDateInRange(t.date, prevStartStr, prevEndStr);
+    });
+    const prevNet =
+      prevFiltered.filter((t) => t.type === 'income').reduce((a, t) => a + t.amount, 0) -
+      prevFiltered.filter((t) => t.type === 'expense').reduce((a, t) => a + t.amount, 0);
+
+    if (prevNet === 0) return currentNet > 0 ? 100 : 0;
+    return ((currentNet - prevNet) / Math.abs(prevNet)) * 100;
+  }, [filtered, transactions, dateRange, selectedMember]);
 
   const calculateIncomeForPeriod = useCallback(() => {
     return filtered
@@ -452,6 +491,7 @@ export function FinanceProvider({ children }: FinanceProviderProps) {
       calculateExpensesByCategory,
       calculateCategoryPercentage,
       calculateSavingsRate,
+      calculateBalanceGrowthPercent,
     }),
     [
       transactions,
@@ -486,6 +526,7 @@ export function FinanceProvider({ children }: FinanceProviderProps) {
       calculateExpensesByCategory,
       calculateCategoryPercentage,
       calculateSavingsRate,
+      calculateBalanceGrowthPercent,
     ]
   );
 
