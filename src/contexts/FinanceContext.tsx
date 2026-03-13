@@ -186,7 +186,7 @@ function createMockData() {
     { id: 't5', type: 'expense', amount: 420, description: 'Mercado', category: 'Mercado', date: randomDate(threeMonthsAgo, today), accountId: bank2.id, memberId: 'm2', installments: 1, status: 'completed', isRecurring: false, isPaid: true },
     { id: 't6', type: 'expense', amount: 350, description: 'Supermercado', category: 'Mercado', date: randomDate(threeMonthsAgo, today), accountId: card1.id, memberId: 'm1', installments: 1, status: 'completed', isRecurring: false, isPaid: true },
     { id: 't7', type: 'expense', amount: 120, description: 'Academia', category: 'Academia', date: randomDate(threeMonthsAgo, today), accountId: card1.id, memberId: 'm1', installments: 1, status: 'completed', isRecurring: true, isPaid: true },
-    { id: 't8', type: 'expense', amount: 154, description: 'Conta de luz', category: 'Contas', date: randomDate(threeMonthsAgo, today), accountId: card1.id, memberId: 'm1', installments: 1, status: 'pending', isRecurring: true, isPaid: false },
+    { id: 't8', type: 'expense', amount: 154, description: 'Conta de luz', category: 'Contas', date: formatDate(new Date(today.getFullYear(), today.getMonth(), 21)), accountId: card1.id, memberId: 'm1', installments: 1, status: 'pending', isRecurring: true, isPaid: false },
     { id: 't9', type: 'expense', amount: 89, description: 'Conta de água', category: 'Contas', date: randomDate(threeMonthsAgo, today), accountId: bank1.id, memberId: 'm1', installments: 1, status: 'completed', isRecurring: true, isPaid: true },
     { id: 't10', type: 'expense', amount: 280, description: 'Restaurante', category: 'Alimentação', date: randomDate(threeMonthsAgo, today), accountId: card2.id, memberId: 'm2', installments: 1, status: 'completed', isRecurring: false, isPaid: true },
     { id: 't11', type: 'expense', amount: 150, description: 'Uber', category: 'Transporte', date: randomDate(threeMonthsAgo, today), accountId: card2.id, memberId: 'm2', installments: 1, status: 'completed', isRecurring: false, isPaid: true },
@@ -205,6 +205,9 @@ function createMockData() {
     { id: 't24', type: 'expense', amount: 75, description: 'Livros', category: 'Educação', date: randomDate(threeMonthsAgo, today), accountId: card2.id, memberId: 'm2', installments: 1, status: 'completed', isRecurring: false, isPaid: true },
     { id: 't25', type: 'income', amount: 500, description: 'Aluguel recebido', category: 'Aluguel recebido', date: randomDate(threeMonthsAgo, today), accountId: bank1.id, memberId: 'm1', installments: 1, status: 'completed', isRecurring: true, isPaid: true },
     { id: 't26', type: 'expense', amount: 110, description: 'Farmácia', category: 'Saúde', date: randomDate(threeMonthsAgo, today), accountId: bank1.id, memberId: null, installments: 1, status: 'completed', isRecurring: false, isPaid: true },
+    { id: 't27', type: 'expense', amount: 89, description: 'Internet', category: 'Contas', date: formatDate(new Date(today.getFullYear(), today.getMonth(), 15)), accountId: bank1.id, memberId: 'm1', installments: 1, status: 'pending', isRecurring: true, isPaid: false },
+    { id: 't28', type: 'expense', amount: 320, description: 'Condomínio', category: 'Contas', date: formatDate(new Date(today.getFullYear(), today.getMonth(), 28)), accountId: bank1.id, memberId: 'm1', installments: 1, status: 'pending', isRecurring: true, isPaid: false },
+    { id: 't29', type: 'expense', amount: 120, description: 'Spotify + Netflix', category: 'Lazer', date: formatDate(new Date(today.getFullYear(), today.getMonth(), 10)), accountId: card2.id, memberId: 'm2', installments: 1, status: 'pending', isRecurring: true, isPaid: false },
   ];
 
   const oneYearFromNow = new Date(today);
