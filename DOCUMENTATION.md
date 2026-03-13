@@ -5,7 +5,7 @@
 - [x] PROMPT 0: Análise e Planejamento Inicial
 - [x] PROMPT 1: Estrutura Base e Configuração
 - [x] PROMPT 2: Sistema de Layout e Navegação Desktop
-- [ ] PROMPT 3: Sistema de Layout e Navegação Mobile
+- [x] PROMPT 3: Sistema de Layout e Navegação Mobile
 - [ ] PROMPT 4: Context Global e Gerenciamento de Estado
 - [ ] PROMPT 5: Cards de Resumo Financeiro
 - [ ] PROMPT 6: Header do Dashboard com Controles
@@ -50,7 +50,7 @@ Onde os prompts citarem 1024px ou 640px, adaptar para **1280px** e **768px** res
 
 - [x] 1. Estrutura Base e Configuração
 - [x] 2. Sistema de Layout e Navegação Desktop
-- [ ] 3. Sistema de Layout e Navegação Mobile
+- [x] 3. Sistema de Layout e Navegação Mobile
 - [ ] 4. Context Global e Gerenciamento de Estado
 - [ ] 5. Cards de Resumo Financeiro
 - [ ] 6. Header do Dashboard com Controles
@@ -118,6 +118,31 @@ Tentativas: 1 | Erros: 0
 
 Semânticas: --color-primary  
 Primitivas: --color-neutral-900, --color-surface-50, --color-secondary-normal, --color-lime, --shape-20, --shape-100
+
+### Build
+
+Tentativas: 1 | Erros: 0
+
+---
+
+## PROMPT 3: Sistema de Layout e Navegação Mobile
+
+**Status:** ✅ | Data: 12/03/2025 | Build: ✅ (1 tentativa)
+
+### Implementado
+
+- HeaderMobile fixo no topo, largura total, visível durante scroll (h-14 = 56px)
+- Logo "mycash+" à esquerda; avatar clicável à direita (trigger do MenuDropdown)
+- MenuDropdown: desliza de cima (slideDown), não fullscreen, overlay escuro semi-transparente
+- Itens de navegação com ícone e texto; item atual com fundo preto (neutral-900)
+- Botão vermelho "Sair" no rodapé (red-600)
+- Fechamento: clique em item, botão X, clique fora (overlay), tecla Escape
+- Breakpoint: Sidebar ≥1280px | HeaderMobile <1280px (nunca juntos)
+
+### Tokens
+
+Semânticas: --color-danger  
+Primitivas: --color-surface-50, --color-secondary-darker, --color-neutral-900, --color-red-600, --space-*
 
 ### Build
 
