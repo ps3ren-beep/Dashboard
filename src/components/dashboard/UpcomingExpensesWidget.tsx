@@ -1,9 +1,16 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useRef } from 'react';
 import { useFinance } from '@/contexts';
 import type { Transaction, BankAccount, CreditCard } from '@/types';
 import { formatCurrency, formatDueDate } from '@/utils/format';
-import { IconWallet, IconPlus, IconCheck } from '@/components/icons/SidebarIcons';
+import { IconWallet, IconPlus, IconCheck, IconChevronUp, IconChevronDown } from '@/components/icons/SidebarIcons';
 import { NewTransactionModal } from '@/components/modals/NewTransactionModal';
+
+const VISIBLE_ITEMS = 3;
+const ITEM_HEIGHT_ESTIMATE = 88;
+const MAX_HEIGHT = VISIBLE_ITEMS * ITEM_HEIGHT_ESTIMATE;
+const SCROLL_AMOUNT = 120;
+/** Altura do card do gráfico de fluxo (para alinhar o painel) */
+const CHART_CARD_HEIGHT = 468;
 
 function getAccountDisplayName(
   accountId: string,
@@ -88,6 +95,14 @@ export function UpcomingExpensesWidget() {
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
   const [markingId, setMarkingId] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollVertical = useCallback((direction: 'up' | 'down') => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const delta = direction === 'up' ? -SCROLL_AMOUNT : SCROLL_AMOUNT;
+    el.scrollBy({ top: delta, behavior: 'smooth' });
+  }, []);
 
   const pendingExpenses = useMemo(() => {
     const filtered = transactions.filter(
@@ -130,7 +145,10 @@ export function UpcomingExpensesWidget() {
   );
 
   return (
-    <section className="rounded-card border border-neutral-300 bg-surface-50 p-[var(--space-32)]">
+    <section
+      className="flex flex-col overflow-hidden rounded-card border border-neutral-300 bg-surface-50 p-[var(--space-32)]"
+      style={{ maxHeight: CHART_CARD_HEIGHT }}
+    >
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center" style={{ gap: 'var(--space-8)' }}>
@@ -160,20 +178,47 @@ export function UpcomingExpensesWidget() {
           </p>
         </div>
       ) : (
-        <div className="mt-6 divide-y divide-neutral-300">
-          {pendingExpenses.map((tx) => (
-            <ExpenseItem
-              key={tx.id}
-              transaction={tx}
-              accountLabel={getAccountDisplayName(
-                tx.accountId,
-                bankAccounts,
-                creditCards
-              )}
-              onMarkPaid={handleMarkPaid}
-              isMarking={markingId === tx.id}
-            />
-          ))}
+        <div className="relative mt-6">
+          {/* Carrossel vertical: scroll quando há muitas despesas */}
+          <div
+            ref={scrollRef}
+            className="scrollbar-hide divide-y divide-neutral-300 overflow-y-auto overflow-x-hidden"
+            style={{ maxHeight: pendingExpenses.length > VISIBLE_ITEMS ? MAX_HEIGHT : undefined }}
+          >
+            {pendingExpenses.map((tx) => (
+              <ExpenseItem
+                key={tx.id}
+                transaction={tx}
+                accountLabel={getAccountDisplayName(
+                  tx.accountId,
+                  bankAccounts,
+                  creditCards
+                )}
+                onMarkPaid={handleMarkPaid}
+                isMarking={markingId === tx.id}
+              />
+            ))}
+          </div>
+          {pendingExpenses.length > VISIBLE_ITEMS && (
+            <div className="mt-2 flex justify-center gap-2">
+              <button
+                type="button"
+                onClick={() => scrollVertical('up')}
+                className="flex size-8 items-center justify-center rounded-full border border-neutral-300 bg-surface-50 text-secondary-darker transition-colors hover:bg-neutral-300/50"
+                aria-label="Rolar para cima"
+              >
+                <IconChevronUp className="size-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollVertical('down')}
+                className="flex size-8 items-center justify-center rounded-full border border-neutral-300 bg-surface-50 text-secondary-darker transition-colors hover:bg-neutral-300/50"
+                aria-label="Rolar para baixo"
+              >
+                <IconChevronDown className="size-4" />
+              </button>
+            </div>
+          )}
         </div>
       )}
 

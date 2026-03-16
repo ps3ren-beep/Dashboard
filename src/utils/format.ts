@@ -10,6 +10,17 @@ export function formatCurrency(value: number): string {
 }
 
 /**
+ * Formata data no padrão DD/MM/AAAA
+ */
+export function formatDateSlash(dateStr: string): string {
+  const [y, m, d] = dateStr.split('-');
+  const day = (d || '').padStart(2, '0');
+  const month = (m || '').padStart(2, '0');
+  const year = y || '';
+  return `${day}/${month}/${year}`;
+}
+
+/**
  * Formata valor monetário de forma compacta para eixos
  * R$ 2k, R$ 4k, R$ 6k, etc.
  */

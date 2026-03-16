@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import { useFinance } from '@/contexts';
 import { IconUser, IconPlus, IconCheck } from '@/components/icons/SidebarIcons';
+import { AddMemberModal } from '@/components/modals/AddMemberModal';
 
 interface FamilyMembersWidgetProps {
-  onAddMember: () => void;
+  onAddMember?: () => void;
 }
 
 export function FamilyMembersWidget({ onAddMember }: FamilyMembersWidgetProps) {
   const { familyMembers, selectedMember, setSelectedMember } = useFinance();
+  const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
 
   return (
     <div className="flex items-center" style={{ gap: 'var(--space-16)' }}>
@@ -45,12 +48,19 @@ export function FamilyMembersWidget({ onAddMember }: FamilyMembersWidgetProps) {
       </div>
       <button
         type="button"
-        onClick={onAddMember}
+        onClick={() => {
+          if (onAddMember) {
+            onAddMember();
+          } else {
+            setIsAddMemberOpen(true);
+          }
+        }}
         className="flex size-12 shrink-0 items-center justify-center rounded-full border-2 border-neutral-300 bg-surface-50 text-secondary-normal transition-colors hover:bg-neutral-300/50 min-[768px]:size-[50px]"
         aria-label="Adicionar membro"
       >
         <IconPlus className="size-6" />
       </button>
+      <AddMemberModal isOpen={isAddMemberOpen} onClose={() => setIsAddMemberOpen(false)} />
     </div>
   );
 }
